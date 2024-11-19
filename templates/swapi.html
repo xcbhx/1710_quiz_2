@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SWAPI Character Search</title>
+</head>
+<body>
+    <h1>SWAPI Character Search</h1>
+    <form action="/swapi" method="POST">
+        <label>
+            Enter Character ID:
+            <input type="number" name="char_id" min="1" required>
+        </label>
+        <button type="submit">Search</button>
+    </form>
+
+    {% if error %}
+    <p style="color: red;">{{ error }}</p>
+    {% elif character %}
+    <h3>Character Details:</h3>
+    <ul>
+        <li><strong>Name:</strong> {{ character.name }}</li>
+        <li><strong>Height:</strong> {{ character.height }} cm</li>
+        <li><strong>Mass:</strong> {{ character.mass }} kg</li>
+        <li><strong>Hair Color:</strong> {{ character.hair_color }}</li>
+        <li><strong>Eye Color:</strong> {{ character.eye_color }}</li>
+        <li><strong>Homeworld:</strong> {{ character.homeworld_name }}</li>
+        <li><strong>Films:</strong>
+            <ul>
+                {% for film in character.film_titles %}
+                <li>{{ film }}</li>
+                {% endfor %}
+            </ul>
+        </li>
+    </ul>
+    {% endif %}
+</body>
+</html>
